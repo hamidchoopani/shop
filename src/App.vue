@@ -13,7 +13,7 @@
       <v-spacer></v-spacer>
       <v-menu open-on-hover>
         <template v-slot:activator="{ props }">
-          <v-btn  v-bind="props">
+          <v-btn v-bind="props">
             filter
             <v-icon size="20">mdi-chevron-down</v-icon>
           </v-btn>
@@ -63,6 +63,31 @@
         </v-row>
       </v-container>
     </v-main>
+
+    <v-footer>
+      <v-row justify="center" no-gutters>
+        <v-btn variant="text" class="mx-2" rounded="xl">
+          electronics
+        </v-btn>
+        <v-btn variant="text" class="mx-2" rounded="xl">
+          jewelery
+        </v-btn>
+        <v-btn variant="text" class="mx-2" rounded="xl">
+          men's clothing
+        </v-btn>
+        <v-btn variant="text" class="mx-2" rounded="xl">
+          women's clothing
+        </v-btn>
+        <v-col class="text-center mt-4" cols="12">
+          <v-btn class="mx-4" variant="text"><v-icon>mdi-twitter</v-icon></v-btn>
+          <v-btn class="mx-4" variant="text"><img width="15" src="@/assets/stackoverflow.png"/></v-btn>
+          <v-btn class="mx-4" variant="text"><img width="15" src="@/assets/gmail.png"/></v-btn>
+        </v-col>
+        <v-col class="text-center mt-4" cols="12">
+          {{ new Date().getFullYear() }}
+        </v-col>
+      </v-row>
+    </v-footer>
   </v-app>
 </template>
 
@@ -90,7 +115,7 @@ function onClick() {
 
 const productStore = useProductStore()
 
-const { AllProduct,getAllCategory,countProductIconHeader,getProductInCart } = storeToRefs(productStore)
+const { AllProduct, getAllCategory, countProductIconHeader, getProductInCart } = storeToRefs(productStore)
 
 
 productStore.getProduct()
@@ -100,27 +125,45 @@ function filterCategory(data) {
   productStore.filterProductWithCategory(data)
 }
 
+
+
 </script>
 
 <style scoped>
+.mdi-instagram{
+  color:#d62976;
+}
+.mdi-twitter{
+  color:#00acee 
+}
+.mdi-linkedin{
+  color:#0A66C2
+}
+.mdi-telegram{
+  color:#2AABEE 
+}
 a {
   text-decoration: none;
 }
-.v-dialog{
+
+.v-dialog {
   align-items: center;
 }
 
-.closeDialog{
+.closeDialog {
   display: contents;
   width: 100px;
 }
-.v-list-item{
+
+.v-list-item {
   cursor: pointer;
 }
-.allProduct{
+
+.allProduct {
   cursor: pointer;
   padding: 10px 0 10px 15px;
 }
+
 .v-input {
   max-width: 10rem !important;
   height: 50px;
