@@ -66,22 +66,13 @@
 
     <v-footer>
       <v-row justify="center" no-gutters>
-        <v-btn variant="text" class="mx-2" rounded="xl">
-          electronics
-        </v-btn>
-        <v-btn variant="text" class="mx-2" rounded="xl">
-          jewelery
-        </v-btn>
-        <v-btn variant="text" class="mx-2" rounded="xl">
-          men's clothing
-        </v-btn>
-        <v-btn variant="text" class="mx-2" rounded="xl">
-          women's clothing
+        <v-btn variant="text" class="mx-2" rounded="xl" v-for="c in getAllCategory">
+          <v-list-item-title @click="filterCategory(c)">{{ c }}</v-list-item-title>
         </v-btn>
         <v-col class="text-center mt-4" cols="12">
           <v-btn class="mx-4" variant="text"><v-icon>mdi-twitter</v-icon></v-btn>
-          <v-btn class="mx-4" variant="text"><img width="15" src="@/assets/stackoverflow.png"/></v-btn>
-          <v-btn class="mx-4" variant="text"><img width="15" src="@/assets/gmail.png"/></v-btn>
+          <v-btn class="mx-4" variant="text"><img width="15" src="@/assets/stackoverflow.png" /></v-btn>
+          <v-btn class="mx-4" variant="text"><img width="15" src="@/assets/gmail.png" /></v-btn>
         </v-col>
         <v-col class="text-center mt-4" cols="12">
           {{ new Date().getFullYear() }}
@@ -130,18 +121,22 @@ function filterCategory(data) {
 </script>
 
 <style scoped>
-.mdi-instagram{
-  color:#d62976;
+.mdi-instagram {
+  color: #d62976;
 }
-.mdi-twitter{
-  color:#00acee 
+
+.mdi-twitter {
+  color: #00acee
 }
-.mdi-linkedin{
-  color:#0A66C2
+
+.mdi-linkedin {
+  color: #0A66C2
 }
-.mdi-telegram{
-  color:#2AABEE 
+
+.mdi-telegram {
+  color: #2AABEE
 }
+
 a {
   text-decoration: none;
 }
