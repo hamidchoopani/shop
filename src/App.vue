@@ -72,7 +72,9 @@
         <v-col class="text-center mt-4" cols="12">
           <v-btn class="mx-4" variant="text"><v-icon>mdi-twitter</v-icon></v-btn>
           <v-btn class="mx-4" variant="text"><img width="15" src="@/assets/stackoverflow.png" /></v-btn>
-          <v-btn class="mx-4" variant="text"><img width="15" src="@/assets/gmail.png" /></v-btn>
+          <!-- <router-link :to="{name:'ContactMe'}"> -->
+            <v-btn class="mx-4" variant="text"><img width="15" src="@/assets/gmail.png" /></v-btn>
+          <!-- </router-link> -->
         </v-col>
         <v-col class="text-center mt-4" cols="12">
           {{ new Date().getFullYear() }}

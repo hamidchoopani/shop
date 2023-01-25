@@ -70,7 +70,26 @@ const AddToCart=(productId)=>{
     flex-direction: row;
     margin-top: 10px;
 }
-
+@media screen and (max-width: 767px) {
+ .v-card{
+    display: grid;
+ }
+ .v-card img {
+    justify-content: center;
+    align-items: center;
+ }
+ img{
+    width: 100%;
+    padding: 10px 15px 0 14px;
+ }
+ .v-card-actions{
+    display: grid;
+ }
+ .text-caption{
+    display: grid;
+    justify-content: end;
+ }
+}
 .v-btn {
     text-transform: none;
     display: flex;
@@ -90,7 +109,7 @@ const AddToCart=(productId)=>{
 }
 
 img {
-    width: 600px;
+    width: 700px;
     height: 500px;
 }
 </style>
