@@ -11,6 +11,10 @@
 
 
       <v-spacer></v-spacer>
+      <router-link v-bind:class="{ 'text-white': clicked, 'text-black': !clicked }" :to="{name:'ContactMe'}">
+        <v-btn >contact us</v-btn>
+      </router-link>
+      
       <v-menu open-on-hover>
         <template v-slot:activator="{ props }">
           <v-btn v-bind="props">
@@ -69,12 +73,14 @@
         <v-btn variant="text" class="mx-2" rounded="xl" v-for="c in getAllCategory">
           <v-list-item-title @click="filterCategory(c)">{{ c }}</v-list-item-title>
         </v-btn>
-        <v-col class="text-center mt-4" cols="12">
+        <v-col class="text-center mt-8" cols="12">
           <v-btn class="mx-4" variant="text"><v-icon>mdi-twitter</v-icon></v-btn>
-          <v-btn class="mx-4" variant="text"><img width="15" src="@/assets/stackoverflow.png" /></v-btn>
-          <!-- <router-link :to="{name:'ContactMe'}"> -->
+          <v-btn class="mx-4" variant="text"><img width="15" src="@/assets/stackoverflow.png" @click="tostackoverflow"/>
+            <v-tooltip activator="parent" location="top">Register</v-tooltip>
+          </v-btn>
+          <router-link :to="{name:'ContactMe'}">
             <v-btn class="mx-4" variant="text"><img width="15" src="@/assets/gmail.png" /></v-btn>
-          <!-- </router-link> -->
+          </router-link>
         </v-col>
         <v-col class="text-center mt-4" cols="12">
           {{ new Date().getFullYear() }}
@@ -90,7 +96,7 @@ import { computed, ref } from 'vue'
 import { storeToRefs } from 'pinia';
 import { useProductStore } from '@/store/Product'
 import cart from '@/components/Cart.vue'
-
+import router from './router/routes';
 // dark mode
 const theme = ref('light')
 theme.value = localStorage.getItem('theme');
@@ -118,7 +124,9 @@ function filterCategory(data) {
   productStore.filterProductWithCategory(data)
 }
 
-
+const tostackoverflow=()=>{
+  window.open('https://stackoverflow.com/users/12456014/hamid-choopani')
+}
 
 </script>
 
