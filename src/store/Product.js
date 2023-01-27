@@ -18,7 +18,6 @@ export const useProductStore = defineStore('productStore', {
         //pagination
         page: 1, //صفحه ی پیش فرض
         pageSize: 4, //تعداد محصولات برای نمایش
-        pagesCount: 0,
         listToShow: ''
 
     }),
@@ -30,12 +29,11 @@ export const useProductStore = defineStore('productStore', {
             axios('https://fakestoreapi.com/products')
                 .then(res => {
                     if (res.status === 200) {
-                        this.AllProduct = res.data;
+                        this.AllProduct = res.data.slice((this.page - 1)* this.pageSize , (this.page) * this.pageSize);
+                        // console.log(res.data);
+                        // this.listToShow = this.AllProduct.slice((this.page - 1) , (this.page) * this.pageSize);
                         this.SingleProduct = '';
                         this.loading = false;
-
-                        // this.pagesCount = Math.ceil(res.data.length / this.pageSize);
-                        // this.listToShow = res.data.slice((this.page - 1) * this.pageSize, (this.page) * this.pageSize)
                     }
                 }).catch(function (error) {
                     console.log(error);
@@ -69,6 +67,7 @@ export const useProductStore = defineStore('productStore', {
         async filterProductWithCategory(category) {
             if (category == 'allProduct') {
                 this.loading = true
+                this.page=1
                 return this.AllProduct = this.getProduct()
             }
             if (category.length > 0) {
@@ -78,16 +77,12 @@ export const useProductStore = defineStore('productStore', {
                         if (res.status === 200) {
                             this.AllProduct = res.data
                             this.loading = false
-                            console.log(res.data);
                         }
                     }).catch(function (error) {
                         console.log(error);
                     })
             }
         },
-
-        //shoping cart  8091  8179
-        // 09186554426
 
         productCount(count) {
             if (count === 'Increase') {

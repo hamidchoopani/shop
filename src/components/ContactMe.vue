@@ -2,35 +2,35 @@
 
     <div class="container">
         <div class="row">
-            <h1>contact us</h1>
+            <h1>contact me</h1>
         </div>
         <div class="row">
             <h4 style="text-align:center"></h4>
         </div>
         <div class="row input-container">
             <form class="form" ref="form" @submit.prevent="sendMail">
-                <div class="col-xs-12">
+                <div class="col-xs-6">
                     <div class="styled-input wide">
                         <input type="text" required name="to_name" :value="inputFieldReset" />
-                        <label>Name</label>
+                        <label class="label-name">Name</label>
                     </div>
                 </div>
                 <div class="col-md-6 col-sm-12">
                     <div class="styled-input">
                         <input type="text" required name="from_name" :value="inputFieldReset" />
-                        <label>Email</label>
+                        <label class="label-email">Email</label>
                     </div>
                 </div>
                 <div class="col-md-6 col-sm-12">
-                    <div class="styled-input" style="float:right;">
-                        <input type="text" required  name="message" :value="inputFieldReset" />
-                        <label>Subject</label>
+                    <div class="styled-input">
+                        <input type="text" class="input-subject" required name="message" :value="inputFieldReset" />
+                        <label class="lable-subject">Subject</label>
                     </div>
                 </div>
                 <div class="col-xs-12">
                     <div class="styled-input wide">
                         <textarea required name="message" type="text" :value="inputFieldReset"></textarea>
-                        <label>Message</label>
+                        <label class="label-message">Message</label>
                     </div>
                 </div>
                 <div class="col-xs-12">
@@ -73,6 +73,50 @@ const sendMail = () => {
 </script>
 
 <style scoped>
+@media screen and (max-width: 767px) {
+    .input-container {
+        width: 70% !important;
+        /* display: flex; */
+        /* max-width: 100%; */
+        margin: auto;
+    }
+    .styled-input {
+        width: 100% !important;
+    }
+    .container {
+        width: 100%;
+    }
+
+    .input-subject {
+        margin-left: 0 !important;
+    }
+
+}
+
+@media screen and (max-width: 595px) {
+    .container {
+        width: 100%;
+    }
+
+    .styled-input {
+        max-width: 100% !important;
+    }
+
+    h1{
+        font-size:40px !important ;
+    }
+}
+@media screen and (min-width: 768px) {
+    .lable-subject {
+    padding-left: 5rem !important;
+}
+}
+.input-subject {
+    margin-left: 64px;
+}
+
+
+
 h1 {
     font-family: "Poppins", sans-serif, "arial";
     font-weight: 600;
@@ -110,15 +154,17 @@ textarea:valid~label {
     border-radius: 4px;
 }
 
-@media only screen and (max-width: 768px) {
+/* @media only screen and (max-width: 768px) {
     .styled-input {
         width: 100%;
     }
-}
+} */
 
-.styled-input label {
+.styled-input .label-name,
+.label-email,
+.label-message, .lable-subject {
     /* color: #999; */
-    padding: 1.3rem 30px 1rem 30px;
+    padding: 0.5rem 30px 1rem 1.5rem;
     position: absolute;
     top: 10px;
     left: 0;
@@ -134,7 +180,7 @@ textarea:valid~label {
 
 input,
 textarea {
-    padding: 30px;
+    padding: 15px;
     border: 0;
     width: 100%;
     font-size: 1rem;
@@ -189,13 +235,13 @@ textarea {
     box-shadow: 0 1px 1px 0 rgba(0, 0, 0, 0.1), 0 1px 1px 0 rgba(0, 0, 0, 0.09);
 }
 
-@media (max-width: 768px) {
+/* @media (max-width: 768px) {
     .submit-btn {
         width: 100%;
         float: none;
         text-align: center;
     }
-}
+} */
 
 input[type="checkbox"]+label {
     /* color: #ccc; */
