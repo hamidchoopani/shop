@@ -9,17 +9,18 @@ export const useProductStore = defineStore('productStore', {
         getAllCategory: [],
         loading: true,
         countProductIconHeader: 0,
-        productLenght: 1,
+        // productLenght: 1,
         //cart
         getAllProuctCart: '',
-        productCountInCart: 1,
         // totalProductInCart:0
 
         //pagination
         page: 1, //صفحه ی پیش فرض
         pageSize: 4, //تعداد محصولات برای نمایش
-        listToShow: ''
+        listToShow: '',
 
+        //for color icon
+        dialog:false
     }),
     getters: {
 
@@ -83,20 +84,6 @@ export const useProductStore = defineStore('productStore', {
                     })
             }
         },
-
-        productCount(count) {
-            if (count === 'Increase') {
-                this.productCountInCart++
-            }
-            if (count === 'Decrease') {
-                if (this.productCountInCart == 0) {
-                    this.productCountInCart = 0
-                } else {
-                    this.productCountInCart--
-                }
-            }
-        },
-
         getProductInCart() {
             axios('https://fakestoreapi.com/carts')
                 .then(res => {
@@ -123,12 +110,5 @@ export const useProductStore = defineStore('productStore', {
                     })
                 })
         },
-        clearProductInCart(productId) {
-            axios.delete(`https://fakestoreapi.com/carts/` + productId)
-                .then(res => {
-
-                    console.log(res);
-                })
-        }
     }
 })

@@ -10,8 +10,8 @@
         <div class="row input-container">
             <form class="form" ref="form" @submit.prevent="sendMail">
                 <div class="col-xs-6">
-                    <div class="styled-input wide">
-                        <input type="text" required name="to_name" :value="inputFieldReset" />
+                    <div class="styled-input wide" >
+                        <input type="text" required name="to_name" v-bind:class="{ 'text-black': dialog, 'text-white': !dialog }" :value="inputFieldReset" />
                         <label class="label-name">Name</label>
                     </div>
                 </div>
@@ -46,6 +46,16 @@
 import { ref } from 'vue';
 import emailjs from 'emailjs-com';
 import Swal from 'sweetalert2'
+
+import { useProductStore } from '@/store/Product'
+import { storeToRefs } from 'pinia';
+
+
+const productStore = useProductStore()
+
+const { dialog } = storeToRefs(productStore)
+
+
 
 const form = ref(null);
 const inputFieldReset = ref(null);
@@ -111,11 +121,17 @@ const sendMail = () => {
     padding-left: 5rem !important;
 }
 }
+
+.text-white{
+    color:#fff
+}
+.text-black{
+    color:#000
+}
+
 .input-subject {
     margin-left: 64px;
 }
-
-
 
 h1 {
     font-family: "Poppins", sans-serif, "arial";
@@ -160,9 +176,11 @@ textarea:valid~label {
     }
 } */
 
-.styled-input .label-name,
+
 .label-email,
-.label-message, .lable-subject {
+.label-name,
+.label-message,
+ .lable-subject {
     /* color: #999; */
     padding: 0.5rem 30px 1rem 1.5rem;
     position: absolute;

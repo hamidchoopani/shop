@@ -16,7 +16,7 @@
         <v-btn>contact me</v-btn>
       </router-link>
       <!-- open-on-hover -->
-      <v-menu class="category">
+      <v-menu open-on-click class="category">
         <template v-slot:activator="{ props }">
           <v-btn v-bind="props" class="filterbtn">
             filter
@@ -32,16 +32,14 @@
         </v-list>
       </v-menu>
 
-      <v-btn class="cart" stacked @click="dialog = true">
-
-        <v-badge class="text-none" :content="countProductIconHeader" color="info">
-          <v-icon>mdi-cart-outline</v-icon>
-          <v-tooltip activator="parent" location="bottom">cart</v-tooltip>
-        </v-badge>
-        <!-- <v-icon @click="dialog = true">mdi-cart</v-icon>
-        <v-tooltip activator="parent" location="bottom">cart</v-tooltip>
-        <span class="count">0</span> -->
-      </v-btn>
+      <router-link :to="{ name: 'Cart' }" v-bind:class="{ 'text-white': clicked, 'text-black': !clicked }">
+        <v-btn class="cart" stacked @click="dialog = true">
+          <v-badge class="text-none" :content="countProductIconHeader" color="info">
+            <v-icon>mdi-cart-outline</v-icon>
+            <v-tooltip activator="parent" location="bottom">cart</v-tooltip>
+          </v-badge>
+        </v-btn>
+      </router-link>
 
       <v-btn :prepend-icon="theme === 'light' ? 'mdi-weather-sunny' : 'mdi-weather-night'" @click="onClick">
         <v-tooltip activator="parent" location="bottom">change theme</v-tooltip>
@@ -142,13 +140,14 @@ import cart from '@/components/Cart.vue'
 import router from './router/routes';
 
 const drawer = ref(null)
+const productStore = useProductStore()
 
+const { AllProduct, getAllCategory, countProductIconHeader, getProductInCart,dialog } = storeToRefs(productStore)
 // dark mode
 const theme = ref('light')
 theme.value = localStorage.getItem('theme');
 let clicked = ref(false)
 clicked.value = localStorage.getItem('colorIcon');
-const dialog = ref(false)
 function onClick() {
   theme.value = theme.value === 'light' ? 'dark' : 'light'
   clicked.value = clicked.value === false ? true : false
@@ -156,12 +155,6 @@ function onClick() {
   localStorage.setItem('colorIcon', clicked.value)
 }
 // end dark mode
-
-
-const productStore = useProductStore()
-
-const { AllProduct, getAllCategory, countProductIconHeader, getProductInCart } = storeToRefs(productStore)
-
 
 productStore.getProduct()
 productStore.getCategory()
@@ -220,9 +213,10 @@ const toTwitter = () => {
   display: grid;
   align-items: center;
 }
-.filterbtnInmenu{
+
+.filterbtnInmenu {
   display: grid;
-    align-items: end;
+  align-items: end;
 }
 
 .mdi-twitter {

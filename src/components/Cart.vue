@@ -4,48 +4,42 @@
       <div class="shopping-cart">
         <!-- Title -->
         <div class="title">
-          Shopping Bag
+          Shopping cart
         </div>
         <!-- Product #1 -->
-
+        <div class="titleCart">
+          <span>product name</span>
+          <span>count</span>
+          <span>price</span>
+        </div>
+        <v-divider></v-divider>
         <div class="item" v-for="p in getAllProuctCart" :key="p">
-          <div class="buttons" @click="clearCart(p.id)">
-            <span class="delete-btn">
-              <v-icon size="30">mdi-window-close</v-icon>
-            </span>
-          </div>
 
-          <div class="image">
-            <img src="https://designmodo.com/demo/shopping-cart/item-1.png" alt="" />
-          </div>
 
           <div class="description">
-            <span>product {{p.id}}</span>
+            <span>product name</span>
           </div>
 
           <div class="quantity">
-            <button class="plus-btn" type="button" name="button" @click="IncreaseNumberProducts">
+            <button class="plus-btn" type="button" name="button">
               <v-icon>mdi-plus</v-icon>
             </button>
-            <span>{{ count }}</span>
-            <button class="minus-btn" type="button" name="button" @click="ReduceNumberProducts">
+            <span>{{ p.products.length }}</span>
+            <button class="minus-btn" type="button" name="button">
               <v-icon>mdi-minus</v-icon>
             </button>
           </div>
 
-          <div class="total-price">$ 45</div>
+          <div class="total-price">$ {{ p.id * 11 * 4 }}</div>
         </div>
-        
+
+        <v-divider></v-divider>
         <div class="total">
-          <v-btn @click="clearCart(p.id)" color="error">clear cart
-            <v-icon>mdi-delete-empty</v-icon>
-          </v-btn>
-          Total: $450
+          Total: $1,188
           <v-btn color="primary">payment
             <v-icon>mdi-credit-card-multiple</v-icon>
           </v-btn>
         </div>
-        <v-divider></v-divider>
 
       </div>
     </v-card-text>
@@ -60,20 +54,10 @@ import { useProductStore } from '@/store/Product';
 import { storeToRefs } from 'pinia';
 
 const ProductData = useProductStore()
-const { productCountInCart, getAllProuctCart } = storeToRefs(ProductData)
+const { getAllProuctCart } = storeToRefs(ProductData)
 ProductData.getProductInCart()
-const count = ref(productCountInCart)
-console.log(getAllProuctCart.value);
-// const totalProduct=ref()
-const IncreaseNumberProducts = () => {
-  ProductData.productCount('Increase')
-}
-const ReduceNumberProducts = () => {
-  ProductData.productCount('Decrease')
-}
-const clearCart = (productId) => {
-  ProductData.clearProductInCart(productId)
-}
+
+
 </script>
 
 <style scoped>
@@ -85,7 +69,6 @@ const clearCart = (productId) => {
 .shopping-cart {
   width: 750px;
   height: auto;
-  margin: 5em auto;
   /* background: #fff; */
   /* box-shadow: 1px 2px 3px 0px rgba(0, 0, 0, 0.1); */
   border-radius: 0.5em;
@@ -100,14 +83,16 @@ const clearCart = (productId) => {
   /* border-bottom: 1px solid #e1e8ee; */
   padding: 1.25em 1.75em;
   /* color: #5e6977; */
-  font-size: 1.125em;
+  font-size: 2em;
   font-weight: 400;
+  text-align: center;
 }
 
 .item {
   padding: 1.25em 1.75em;
   height: 7.5em;
   display: flex;
+  justify-content: space-between;
 }
 
 
@@ -215,8 +200,17 @@ input:focus {
 .total {
   display: flex;
   flex-direction: row;
-  justify-content: space-between;
+  justify-content: space-evenly;
   place-items: center;
+  margin-top: 15px;
+}
+
+.titleCart {
+  display: flex;
+  justify-content: space-between;
+  font-size: 17px;
+  padding: 0 2.5rem 0 1.5rem;
+  margin-bottom: 20px;
 }
 
 /* media queries */
