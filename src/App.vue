@@ -4,17 +4,19 @@
 
       <!-- <v-app-bar-nav-icon></v-app-bar-nav-icon> -->
       <v-app-bar-nav-icon class="hamburgermenu" @click="drawer = !drawer"></v-app-bar-nav-icon>
-      <router-link :to="{ name: 'Product' }">
-        <v-toolbar-title v-bind:class="{ 'text-white': clicked, 'text-black': !clicked }">Shop</v-toolbar-title>
-      </router-link>
+      <!-- <router-link :to="{ name: 'Product' }"> -->
+        <v-toolbar-title>
+          <v-btn variant="plain" :to="{ name: 'Product' }">Shop</v-btn>
+        </v-toolbar-title>
+      <!-- </router-link> -->
 
 
 
       <v-spacer></v-spacer>
-      <router-link class="contactme" v-bind:class="{ 'text-white': clicked, 'text-black': !clicked }"
-        :to="{ name: 'ContactMe' }">
-        <v-btn>contact me</v-btn>
-      </router-link>
+      <!-- <router-link class="contactme" v-bind:class="{ 'text-white': clicked, 'text-black': !clicked }"
+        :to="{ name: 'ContactMe' }"> -->
+        <v-btn :to="{ name: 'ContactMe' }">contact me</v-btn>
+      <!-- </router-link> -->
       <!-- open-on-hover -->
       <!-- <v-menu open-on-click class="category">
         <template v-slot:activator="{ props }">
@@ -31,41 +33,40 @@
           </v-list-item>
         </v-list>
       </v-menu> -->
-      
-      
-      <v-btn
-    >
-    filter
-    <v-icon size="20">mdi-chevron-down</v-icon>
-      <v-menu activator="parent">
-        <v-list>
-          <v-list-item class="allProduct" @click="filterCategory('allProduct')"> All Product </v-list-item>
-          <v-list-item v-for="c in getAllCategory" :key="c">
-            <v-list-item-title @click="filterCategory(c)">{{ c }}</v-list-item-title>
-          </v-list-item>
+
+
+      <v-btn>
+        filter
+        <v-icon size="20">mdi-chevron-down</v-icon>
+        <v-menu activator="parent">
+          <v-list>
+            <v-list-item @click="filterCategory('allProduct')"> All Product </v-list-item>
+            <v-list-item v-for="c in getAllCategory" :key="c">
+              <v-list-item-title @click="filterCategory(c)">{{ c }}</v-list-item-title>
+            </v-list-item>
             <!-- <v-list-item-title>All Product</v-list-item-title> -->
-         
-        </v-list>
-      </v-menu>
-    </v-btn>
+
+          </v-list>
+        </v-menu>
+      </v-btn>
 
 
 
-      <router-link :to="{ name: 'Cart' }" v-bind:class="{ 'text-white': clicked, 'text-black': !clicked }">
-        <v-btn class="cart" stacked @click="dialog = true">
+      <!-- <router-link :to="{ name: 'Cart' }" v-bind:class="{ 'text-white': clicked, 'text-black': !clicked }"> -->
+        <v-btn :to="{ name: 'Cart' }" class="cart" stacked @click="dialog = true">
           <v-badge class="text-none" :content="countProductIconHeader" color="info">
             <v-icon>mdi-cart-outline</v-icon>
             <v-tooltip activator="parent" location="bottom">cart</v-tooltip>
           </v-badge>
         </v-btn>
-      </router-link>
+      <!-- </router-link> -->
 
       <v-btn :prepend-icon="theme === 'light' ? 'mdi-weather-sunny' : 'mdi-weather-night'" @click="onClick">
         <v-tooltip activator="parent" location="bottom">change theme</v-tooltip>
       </v-btn>
 
       <!-- <router-link :to="{ name: 'AccountUser' }"> -->
-      <v-btn class="account" icon v-bind:class="{ 'text-white': clicked, 'text-black': !clicked }">
+      <v-btn icon class="account">
         <v-icon>mdi-account</v-icon>
         <v-tooltip activator="parent" location="bottom">Register</v-tooltip>
       </v-btn>
@@ -157,11 +158,11 @@ import { storeToRefs } from 'pinia';
 import { useProductStore } from '@/store/Product'
 import cart from '@/components/Cart.vue'
 import router from './router/routes';
-
+const dialog = ref(true)
 const drawer = ref(null)
 const productStore = useProductStore()
-const open=ref(['Users'])
-const { AllProduct, getAllCategory, countProductIconHeader, getProductInCart, dialog } = storeToRefs(productStore)
+const open = ref(['Users'])
+const { AllProduct, getAllCategory, countProductIconHeader, getProductInCart } = storeToRefs(productStore)
 // dark mode
 const theme = ref('light')
 theme.value = localStorage.getItem('theme');

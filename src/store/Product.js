@@ -20,7 +20,7 @@ export const useProductStore = defineStore('productStore', {
         listToShow: '',
 
         //for color icon
-        dialog:false
+        // dialog:false
     }),
     getters: {
 

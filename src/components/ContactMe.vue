@@ -11,7 +11,7 @@
             <form class="form" ref="form" @submit.prevent="sendMail">
                 <div class="col-xs-6">
                     <div class="styled-input wide" >
-                        <input type="text" required name="to_name" v-bind:class="{ 'text-black': dialog, 'text-white': !dialog }" :value="inputFieldReset" />
+                        <input type="text" required name="to_name" :value="inputFieldReset" />
                         <label class="label-name">Name</label>
                     </div>
                 </div>
@@ -47,15 +47,10 @@ import { ref } from 'vue';
 import emailjs from 'emailjs-com';
 import Swal from 'sweetalert2'
 
-import { useProductStore } from '@/store/Product'
-import { storeToRefs } from 'pinia';
-
-
-const productStore = useProductStore()
-
-const { dialog } = storeToRefs(productStore)
-
-
+const theme = ref('light')
+theme.value = localStorage.getItem('theme');
+let clicked = ref(false)
+clicked.value = localStorage.getItem('colorIcon');
 
 const form = ref(null);
 const inputFieldReset = ref(null);
