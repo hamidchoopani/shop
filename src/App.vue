@@ -16,7 +16,7 @@
         <v-btn>contact me</v-btn>
       </router-link>
       <!-- open-on-hover -->
-      <v-menu open-on-click class="category">
+      <!-- <v-menu open-on-click class="category">
         <template v-slot:activator="{ props }">
           <v-btn v-bind="props" class="filterbtn">
             filter
@@ -30,7 +30,26 @@
             <v-list-item-title @click="filterCategory(c)">{{ c }}</v-list-item-title>
           </v-list-item>
         </v-list>
+      </v-menu> -->
+      
+      
+      <v-btn
+    >
+    filter
+    <v-icon size="20">mdi-chevron-down</v-icon>
+      <v-menu activator="parent">
+        <v-list>
+          <v-list-item class="allProduct" @click="filterCategory('allProduct')"> All Product </v-list-item>
+          <v-list-item v-for="c in getAllCategory" :key="c">
+            <v-list-item-title @click="filterCategory(c)">{{ c }}</v-list-item-title>
+          </v-list-item>
+            <!-- <v-list-item-title>All Product</v-list-item-title> -->
+         
+        </v-list>
       </v-menu>
+    </v-btn>
+
+
 
       <router-link :to="{ name: 'Cart' }" v-bind:class="{ 'text-white': clicked, 'text-black': !clicked }">
         <v-btn class="cart" stacked @click="dialog = true">
@@ -141,8 +160,8 @@ import router from './router/routes';
 
 const drawer = ref(null)
 const productStore = useProductStore()
-
-const { AllProduct, getAllCategory, countProductIconHeader, getProductInCart,dialog } = storeToRefs(productStore)
+const open=ref(['Users'])
+const { AllProduct, getAllCategory, countProductIconHeader, getProductInCart, dialog } = storeToRefs(productStore)
 // dark mode
 const theme = ref('light')
 theme.value = localStorage.getItem('theme');
