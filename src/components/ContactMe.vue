@@ -11,7 +11,7 @@
             <form class="form" ref="form" @submit.prevent="sendMail">
                 <div class="col-xs-6">
                     <div class="styled-input wide" >
-                        <input type="text" required name="to_name" :value="inputFieldReset" />
+                        <input type="text" required name="to_name" v-bind:class="{ 'text-white': theme, 'text-black': !theme }" :value="inputFieldReset" />
                         <label class="label-name">Name</label>
                     </div>
                 </div>
@@ -49,9 +49,7 @@ import Swal from 'sweetalert2'
 
 const theme = ref('light')
 theme.value = localStorage.getItem('theme');
-let clicked = ref(false)
-clicked.value = localStorage.getItem('colorIcon');
-
+console.log(theme.value);
 const form = ref(null);
 const inputFieldReset = ref(null);
 const sendMail = () => {

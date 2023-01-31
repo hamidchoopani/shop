@@ -5,9 +5,9 @@
       <!-- <v-app-bar-nav-icon></v-app-bar-nav-icon> -->
       <v-app-bar-nav-icon class="hamburgermenu" @click="drawer = !drawer"></v-app-bar-nav-icon>
       <!-- <router-link :to="{ name: 'Product' }"> -->
-        <v-toolbar-title>
-          <v-btn variant="plain" :to="{ name: 'Product' }">Shop</v-btn>
-        </v-toolbar-title>
+      <v-toolbar-title>
+        <v-btn variant="plain" class="text-orange" :to="{ name: 'Product' }">Shop</v-btn>
+      </v-toolbar-title>
       <!-- </router-link> -->
 
 
@@ -15,50 +15,16 @@
       <v-spacer></v-spacer>
       <!-- <router-link class="contactme" v-bind:class="{ 'text-white': clicked, 'text-black': !clicked }"
         :to="{ name: 'ContactMe' }"> -->
-        <v-btn :to="{ name: 'ContactMe' }">contact me</v-btn>
+      <v-btn :to="{ name: 'ContactMe' }">contact me</v-btn>
       <!-- </router-link> -->
-      <!-- open-on-hover -->
-      <!-- <v-menu open-on-click class="category">
-        <template v-slot:activator="{ props }">
-          <v-btn v-bind="props" class="filterbtn">
-            filter
-            <v-icon size="20">mdi-chevron-down</v-icon>
-          </v-btn>
-        </template>
-
-        <v-list>
-          <v-list-item-title class="allProduct" @click="filterCategory('allProduct')">All Product</v-list-item-title>
-          <v-list-item v-for="c in getAllCategory" :key="c">
-            <v-list-item-title @click="filterCategory(c)">{{ c }}</v-list-item-title>
-          </v-list-item>
-        </v-list>
-      </v-menu> -->
-
-
-      <v-btn>
-        filter
-        <v-icon size="20">mdi-chevron-down</v-icon>
-        <v-menu activator="parent">
-          <v-list>
-            <v-list-item @click="filterCategory('allProduct')"> All Product </v-list-item>
-            <v-list-item v-for="c in getAllCategory" :key="c">
-              <v-list-item-title @click="filterCategory(c)">{{ c }}</v-list-item-title>
-            </v-list-item>
-            <!-- <v-list-item-title>All Product</v-list-item-title> -->
-
-          </v-list>
-        </v-menu>
-      </v-btn>
-
-
-
+      
       <!-- <router-link :to="{ name: 'Cart' }" v-bind:class="{ 'text-white': clicked, 'text-black': !clicked }"> -->
-        <v-btn :to="{ name: 'Cart' }" class="cart" stacked @click="dialog = true">
-          <v-badge class="text-none" :content="countProductIconHeader" color="info">
-            <v-icon>mdi-cart-outline</v-icon>
-            <v-tooltip activator="parent" location="bottom">cart</v-tooltip>
-          </v-badge>
-        </v-btn>
+      <v-btn :to="{ name: 'Cart' }" class="cart" stacked @click="dialog = true">
+        <v-badge class="text-none" :content="countProductIconHeader" color="info">
+          <v-icon>mdi-cart-outline</v-icon>
+          <v-tooltip activator="parent" location="bottom">cart</v-tooltip>
+        </v-badge>
+      </v-btn>
       <!-- </router-link> -->
 
       <v-btn :prepend-icon="theme === 'light' ? 'mdi-weather-sunny' : 'mdi-weather-night'" @click="onClick">
@@ -92,33 +58,28 @@
           <v-btn variant="text">contact me</v-btn>
         </router-link>
 
-        <v-btn variant="text" class="cartInmenu" stacked @click="dialog = true">
+        <v-btn :to="{ name: 'Cart' }" variant="text" class="cartInmenu" stacked @click="dialog = true">
           <v-badge class="text-none" :content="countProductIconHeader" color="info">
             <v-icon>mdi-cart-outline</v-icon>
             <v-tooltip activator="parent" location="bottom">cart</v-tooltip>
           </v-badge>
         </v-btn>
 
-        <!-- open-on-hover -->
-        <v-menu class="categoryInmenu">
-          <template v-slot:activator="{ props }">
-            <v-btn variant="text" v-bind="props" class="filterbtnInmenu">
-              filter
-              <v-icon size="20">mdi-chevron-down</v-icon>
-            </v-btn>
-          </template>
-          <v-list>
-            <v-list-item-title class="allProduct" @click="filterCategory('allProduct')">All Product</v-list-item-title>
-            <v-list-item v-for="c in getAllCategory" :key="c">
-              <v-list-item-title @click="filterCategory(c)">{{ c }}</v-list-item-title>
-            </v-list-item>
-          </v-list>
-        </v-menu>
       </div>
     </v-navigation-drawer>
+    <div class="filterCategory">
+            <v-btn v-for="c in getAllCategory" :key="c" class="ma-6 text-orange-lighten-2">
+              <span @click="filterCategory(c)">{{ c }}</span>
+            </v-btn>
+          </div>
     <v-main>
       <v-container>
         <v-row>
+         
+          <!-- <v-btn variant="text" @click="filterCategory(electronics)">electronics</v-btn>
+          <v-btn variant="text" @click="filterCategory(jewelery)">jewelery</v-btn>
+          <v-btn variant="text" @click="filterCategory(mensclothing)">men's clothing</v-btn>
+          <v-btn variant="text" @click="filterCategory(womensclothing)">women's clothing</v-btn> -->
           <router-view></router-view>
         </v-row>
       </v-container>
@@ -126,7 +87,7 @@
 
     <v-footer>
       <v-row justify="center" no-gutters>
-        <v-btn variant="text" class="mx-2" rounded="xl" v-for="c in getAllCategory">
+        <v-btn variant="text" class="mx-2 text-orange-lighten-2" rounded="xl" v-for="c in getAllCategory">
           <v-list-item-title @click="filterCategory(c)">{{ c }}</v-list-item-title>
         </v-btn>
         <v-col class="text-center mt-8" cols="12">
@@ -143,7 +104,7 @@
             </v-btn>
           </router-link>
         </v-col>
-        <v-col class="text-center mt-4" cols="12">
+        <v-col class="text-center mt-4" cols="12 text-orange-lighten-2">
           {{ new Date().getFullYear() }}
         </v-col>
       </v-row>
@@ -180,6 +141,7 @@ productStore.getProduct()
 productStore.getCategory()
 productStore.getProductInCart()
 function filterCategory(data) {
+  console.log(data);
   productStore.filterProductWithCategory(data)
 }
 
@@ -210,6 +172,28 @@ const toTwitter = () => {
   .filterbtn,
   .account {
     display: none;
+  }
+}
+.v-main{
+  padding-top: 0;
+}
+.filterCategory{
+  margin-top: 60px;
+  display: grid;
+  grid-template-columns: repeat(4, auto);
+  align-items: center;
+  justify-content: center;
+}
+@media screen and (max-width: 798px) {
+  .filterCategory {
+    display: grid;
+    grid-template-columns: repeat(2, 1fr);
+  }
+}
+@media screen and (max-width: 460px) {
+  .filterCategory {
+    display: grid;
+    grid-template-columns: repeat(1, 1fr);
   }
 }
 

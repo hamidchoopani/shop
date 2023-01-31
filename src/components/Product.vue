@@ -31,11 +31,10 @@
             </v-card>
         </v-col>
     </div>
-
+    
     <v-divider></v-divider>
     <div class="text-center">
-        <v-pagination v-model="page" :length="pageSize" rounded="circle" prev-icon="mdi-menu-left"
-      next-icon="mdi-menu-right" @click="pageination(page)"></v-pagination>
+        <v-pagination v-model="page" :length="pageSize" rounded="circle" @click="pageination(page)"></v-pagination>
     </div>
 </template>
 

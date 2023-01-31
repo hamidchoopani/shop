@@ -71,6 +71,7 @@ export const useProductStore = defineStore('productStore', {
                 this.page=1
                 return this.AllProduct = this.getProduct()
             }
+            console.log(category);
             if (category.length > 0) {
                 this.loading = true
                 await axios(`https://fakestoreapi.com/products/category/${category}`)
