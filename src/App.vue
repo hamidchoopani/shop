@@ -64,22 +64,17 @@
             <v-tooltip activator="parent" location="bottom">cart</v-tooltip>
           </v-badge>
         </v-btn>
-
       </div>
     </v-navigation-drawer>
-    <div class="filterCategory">
-            <v-btn v-for="c in getAllCategory" :key="c" class="ma-6 text-orange-lighten-2">
-              <span @click="filterCategory(c)">{{ c }}</span>
-            </v-btn>
-          </div>
+    <!-- <div class="filterCategory mt-40">
+        <v-btn v-for="c in getAllCategory" :key="c" class="ma-6 text-orange-lighten-2">
+          <span @click="filterCategory(c)">{{ c }}</span>
+        </v-btn>
+      </div> -->
+   
     <v-main>
       <v-container>
         <v-row>
-         
-          <!-- <v-btn variant="text" @click="filterCategory(electronics)">electronics</v-btn>
-          <v-btn variant="text" @click="filterCategory(jewelery)">jewelery</v-btn>
-          <v-btn variant="text" @click="filterCategory(mensclothing)">men's clothing</v-btn>
-          <v-btn variant="text" @click="filterCategory(womensclothing)">women's clothing</v-btn> -->
           <router-view></router-view>
         </v-row>
       </v-container>
@@ -177,25 +172,7 @@ const toTwitter = () => {
 .v-main{
   padding-top: 0;
 }
-.filterCategory{
-  margin-top: 60px;
-  display: grid;
-  grid-template-columns: repeat(4, auto);
-  align-items: center;
-  justify-content: center;
-}
-@media screen and (max-width: 798px) {
-  .filterCategory {
-    display: grid;
-    grid-template-columns: repeat(2, 1fr);
-  }
-}
-@media screen and (max-width: 460px) {
-  .filterCategory {
-    display: grid;
-    grid-template-columns: repeat(1, 1fr);
-  }
-}
+
 
 .inmenu {
   display: grid;

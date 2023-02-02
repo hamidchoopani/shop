@@ -1,6 +1,6 @@
 import router from '@/router/routes'
 import vuetify from './plugins/vuetify'
-
+    
 // sweetalert
 import VueSweetalert2 from 'vue-sweetalert2';
 import 'sweetalert2/dist/sweetalert2.min.css';

@@ -1,6 +1,12 @@
 <template>
 
+    <div class="filterCategory">
+    <v-btn v-for="c in getAllCategory" :key="c" class="ma-6 text-orange-lighten-2">
+      <span @click="filterCategory(c)">{{ c }}</span>
+    </v-btn>
+  </div>
     <div class="product" >
+
 
         <div class="loading" v-if="loading">
             <v-col class="text-subtitle-1 text-center" cols="12">
@@ -50,11 +56,13 @@ import { storeToRefs } from 'pinia';
 
 const productStore = useProductStore()
 
-const { AllProduct, loading, page,pageSize } = storeToRefs(productStore)
+const { AllProduct, loading, page,pageSize,getAllCategory } = storeToRefs(productStore)
 
 
 productStore.getProduct()
-
+function filterCategory(data) {
+  productStore.filterProductWithCategory(data)
+}
 const pageination=(value)=>{
 productStore.getProduct(value)
 }
@@ -70,6 +78,27 @@ productStore.getProduct(value)
 a {
     text-decoration: none;
 }
+
+.filterCategory{
+  margin-top: 60px;
+  display: grid;
+  grid-template-columns: repeat(4, auto);
+  align-items: center;
+  justify-content: center;
+}
+@media screen and (max-width: 798px) {
+  .filterCategory {
+    display: grid;
+    grid-template-columns: repeat(2, 1fr);
+  }
+}
+@media screen and (max-width: 460px) {
+  .filterCategory {
+    display: grid;
+    grid-template-columns: repeat(1, 1fr);
+  }
+}
+
 
 .product {
     display: grid;

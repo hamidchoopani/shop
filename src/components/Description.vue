@@ -1,5 +1,5 @@
 <template>
-     <div class="loading" v-if="loading">
+     <div class="loading mt-20" v-if="loading">
         <v-col
           class="text-subtitle-1 text-center"
           cols="12"
@@ -68,7 +68,7 @@ const AddToCart=(productId)=>{
     width: 100%;
     display: flex;
     flex-direction: row;
-    margin-top: 10px;
+    margin-top: 100px;
 }
 @media screen and (max-width: 767px) {
  .v-card{

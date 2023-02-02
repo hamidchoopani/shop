@@ -4,38 +4,39 @@
         <div class="row">
             <h1>contact me</h1>
         </div>
-        <div class="row">
-            <h4 style="text-align:center"></h4>
-        </div>
         <div class="row input-container">
             <form class="form" ref="form" @submit.prevent="sendMail">
                 <div class="col-xs-6">
-                    <div class="styled-input wide" >
-                        <input type="text" required name="to_name" v-bind:class="{ 'text-white': theme, 'text-black': !theme }" :value="inputFieldReset" />
+                    <div class="styled-input wide">
+                        <input type="text" name="to_name" :value="inputFieldReset" required/>
                         <label class="label-name">Name</label>
+                        <!-- <span>{{ errors.name }}</span> -->
                     </div>
                 </div>
                 <div class="col-md-6 col-sm-12">
                     <div class="styled-input">
-                        <input type="text" required name="from_name" :value="inputFieldReset" />
+                        <input type="text" name="from_name" :value="inputFieldReset" required/>
                         <label class="label-email">Email</label>
+                        <!-- <span>{{ errors.email }}</span> -->
                     </div>
                 </div>
                 <div class="col-md-6 col-sm-12">
                     <div class="styled-input">
-                        <input type="text" class="input-subject" required name="message" :value="inputFieldReset" />
+                        <input type="text" class="input-subject" name="message" :value="inputFieldReset" required/>
                         <label class="lable-subject">Subject</label>
+                        <!-- <span>{{ errors.subject }}</span> -->
                     </div>
                 </div>
                 <div class="col-xs-12">
                     <div class="styled-input wide">
-                        <textarea required name="message" type="text" :value="inputFieldReset"></textarea>
+                        <textarea name="message" type="text" :value="inputFieldReset" required></textarea>
                         <label class="label-message">Message</label>
+                        <!-- <span>{{ errors.message }}</span> -->
                     </div>
                 </div>
                 <div class="col-xs-12">
                     <!-- <div class="btn-lrg submit-btn">Send Message</div> -->
-                    <input class="btn-lrg submit-btn" type="submit" name="Send Message" />
+                    <input class="btn-lrg submit-btn" type="submit" name="Send" />
                 </div>
             </form>
         </div>
@@ -47,11 +48,32 @@ import { ref } from 'vue';
 import emailjs from 'emailjs-com';
 import Swal from 'sweetalert2'
 
+
+// import { useForm } from 'vee-validate';
+// import * as yup from 'yup';
+// const schema = yup.object({
+//     name: yup.string().required(),
+//     email: yup.string().email().required(),
+//     subject: yup.string().required(),
+//     message: yup.string().required()
+// });
+// const { useFieldModel, errors, handleSubmit } = useForm({
+//     validationSchema: schema,
+// });
+
+// const [name, email, subject, message] = useFieldModel(['name', 'email', 'subject', 'message']);
+
+// const onSubmit = handleSubmit((values) => {
+
+//       alert(JSON.stringify(values, null, 2));
+// });
+
 const theme = ref('light')
 theme.value = localStorage.getItem('theme');
 console.log(theme.value);
 const form = ref(null);
 const inputFieldReset = ref(null);
+
 const sendMail = () => {
     emailjs.sendForm('service_g9i2dpl', 'template_6w0672m', form.value, '3z66-fmfviL9jQHXe')
         .then(() => {
@@ -61,7 +83,6 @@ const sendMail = () => {
                 title: 'Submitted successfully',
                 text: 'Thank you for your comments',
             })
-            console.log(form.value);
             inputFieldReset.value = " ";
         }, (error) => {
             Swal.fire({
@@ -83,17 +104,24 @@ const sendMail = () => {
         /* max-width: 100%; */
         margin: auto;
     }
+
     .styled-input {
         width: 100% !important;
     }
+
     .container {
         width: 100%;
+        margin-top: 100px;
     }
 
     .input-subject {
         margin-left: 0 !important;
     }
 
+}
+
+.container {
+    margin-top: 100px;
 }
 
 @media screen and (max-width: 595px) {
@@ -105,21 +133,27 @@ const sendMail = () => {
         max-width: 100% !important;
     }
 
-    h1{
-        font-size:40px !important ;
+    h1 {
+        font-size: 40px !important;
     }
 }
+
 @media screen and (min-width: 768px) {
     .lable-subject {
-    padding-left: 5rem !important;
-}
+        padding-left: 5rem !important;
+    }
 }
 
-.text-white{
-    color:#fff
+span {
+    color: rgb(160, 15, 15);
 }
-.text-black{
-    color:#000
+
+.text-white {
+    color: #fff
+}
+
+.text-black {
+    color: #000
 }
 
 .input-subject {
@@ -173,7 +207,7 @@ textarea:valid~label {
 .label-email,
 .label-name,
 .label-message,
- .lable-subject {
+.lable-subject {
     /* color: #999; */
     padding: 0.5rem 30px 1rem 1.5rem;
     position: absolute;
