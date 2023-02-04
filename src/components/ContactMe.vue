@@ -8,30 +8,32 @@
             <form class="form" ref="form" @submit.prevent="sendMail">
                 <div class="col-xs-6">
                     <div class="styled-input wide">
-                        <input type="text" name="to_name" :value="inputFieldReset" required/>
+                        <input type="text" name="to_name" v-model="name" />
                         <label class="label-name">Name</label>
-                        <!-- <span>{{ errors.name }}</span> -->
+                        <!--  :value="inputFieldReset" -->
+                        <span>{{ errors.name }}</span>
                     </div>
                 </div>
                 <div class="col-md-6 col-sm-12">
                     <div class="styled-input">
-                        <input type="text" name="from_name" :value="inputFieldReset" required/>
+                        <input type="text" name="from_name"  v-model="email" />
                         <label class="label-email">Email</label>
-                        <!-- <span>{{ errors.email }}</span> -->
+                        <span>{{ errors.email }}</span>
                     </div>
                 </div>
                 <div class="col-md-6 col-sm-12">
                     <div class="styled-input">
-                        <input type="text" class="input-subject" name="message" :value="inputFieldReset" required/>
+                        <input type="text" class="input-subject" name="message"
+                            v-model="subject" />
                         <label class="lable-subject">Subject</label>
-                        <!-- <span>{{ errors.subject }}</span> -->
+                        <span>{{ errors.subject }}</span>
                     </div>
                 </div>
                 <div class="col-xs-12">
                     <div class="styled-input wide">
-                        <textarea name="message" type="text" :value="inputFieldReset" required></textarea>
+                        <textarea name="message" type="text" v-model="message"></textarea>
                         <label class="label-message">Message</label>
-                        <!-- <span>{{ errors.message }}</span> -->
+                        <span>{{ errors.message }}</span>
                     </div>
                 </div>
                 <div class="col-xs-12">
@@ -48,25 +50,28 @@ import { ref } from 'vue';
 import emailjs from 'emailjs-com';
 import Swal from 'sweetalert2'
 
+import { useField, useForm } from 'vee-validate';
+import { toFormValidator } from '@vee-validate/zod';
+import * as zod from 'zod';
 
-// import { useForm } from 'vee-validate';
-// import * as yup from 'yup';
-// const schema = yup.object({
-//     name: yup.string().required(),
-//     email: yup.string().email().required(),
-//     subject: yup.string().required(),
-//     message: yup.string().required()
-// });
-// const { useFieldModel, errors, handleSubmit } = useForm({
-//     validationSchema: schema,
-// });
 
-// const [name, email, subject, message] = useFieldModel(['name', 'email', 'subject', 'message']);
+const validationSchema = toFormValidator(
+    zod.object({
+        name: zod.string().nonempty('This is required').min(8, { message: 'Too short' }),
+        email: zod.string().nonempty('This is required').email({ message: 'Must be a valid email' }),
+        subject: zod.string().nonempty('This is required').min(8, { message: 'Too short' }),
+        message: zod.string().nonempty('This is required').min(8, { message: 'Too short' }).max(50, { message: 'Too long' }),
+    })
+);
 
-// const onSubmit = handleSubmit((values) => {
+const { handleSubmit, errors } = useForm({
+  validationSchema,
+});
+const { value: name } = useField('name');
+const { value: email } = useField('email');
+const { value: subject } = useField('subject');
+const { value: message } = useField('message');
 
-//       alert(JSON.stringify(values, null, 2));
-// });
 
 const theme = ref('light')
 theme.value = localStorage.getItem('theme');
@@ -74,7 +79,7 @@ console.log(theme.value);
 const form = ref(null);
 const inputFieldReset = ref(null);
 
-const sendMail = () => {
+const sendMail = handleSubmit(values=>{
     emailjs.sendForm('service_g9i2dpl', 'template_6w0672m', form.value, '3z66-fmfviL9jQHXe')
         .then(() => {
             // alert('Message sent!')
@@ -83,15 +88,36 @@ const sendMail = () => {
                 title: 'Submitted successfully',
                 text: 'Thank you for your comments',
             })
-            inputFieldReset.value = " ";
+            // inputFieldReset.value = " ";
         }, (error) => {
             Swal.fire({
                 icon: 'error',
                 title: 'An error occurred',
                 text: 'Sorry, try again in a few minutes',
             })
-        });
-}
+        }); 
+}) 
+
+
+
+// const sendMail = () => {
+//     emailjs.sendForm('service_g9i2dpl', 'template_6w0672m', form.value, '3z66-fmfviL9jQHXe')
+//         .then(() => {
+//             // alert('Message sent!')
+//             Swal.fire({
+//                 icon: 'success',
+//                 title: 'Submitted successfully',
+//                 text: 'Thank you for your comments',
+//             })
+//             inputFieldReset.value = " ";
+//         }, (error) => {
+//             Swal.fire({
+//                 icon: 'error',
+//                 title: 'An error occurred',
+//                 text: 'Sorry, try again in a few minutes',
+//             })
+//         });
+// }
 
 
 </script>
@@ -148,13 +174,13 @@ span {
     color: rgb(160, 15, 15);
 }
 
-.text-white {
+/* .text-white {
     color: #fff
 }
 
 .text-black {
     color: #000
-}
+} */
 
 .input-subject {
     margin-left: 64px;
