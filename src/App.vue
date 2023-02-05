@@ -13,9 +13,11 @@
 
 
       <v-spacer></v-spacer>
-      
+
       <v-btn :to="{ name: 'ContactMe' }">contact me</v-btn>
-     
+
+      <v-select clearable label="Select" :items="['California', 'Colorado', 'Florida', 'Georgia', 'Texas', 'Wyoming']"
+        variant="solo"></v-select>
 
       <v-btn :to="{ name: 'Cart' }" class="cart" stacked @click="dialog = true">
         <v-badge class="text-none" :content="countProductIconHeader" color="info">
@@ -23,7 +25,7 @@
           <v-tooltip activator="parent" location="bottom">cart</v-tooltip>
         </v-badge>
       </v-btn>
-     
+
 
       <v-btn :prepend-icon="theme === 'light' ? 'mdi-weather-sunny' : 'mdi-weather-night'" @click="onClick">
         <v-tooltip activator="parent" location="bottom">change theme</v-tooltip>
