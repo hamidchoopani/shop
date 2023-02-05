@@ -6,40 +6,50 @@
         </div>
         <div class="row input-container">
             <form class="form" ref="form" @submit.prevent="sendMail">
-                <div class="col-xs-6">
-                    <div class="styled-input wide">
-                        <input type="text" name="to_name" v-model="name" />
+                <!-- <div class="col-xs-6"> -->
+                <div class="styled-input wide">
+
+                    <v-text-field v-model="name" name="to_name" :error-messages="errors.name" label="Name"></v-text-field>
+
+                    <!-- <input type="text" name="to_name" v-model="name" />
                         <label class="label-name">Name</label>
-                        <!--  :value="inputFieldReset" -->
-                        <span>{{ errors.name }}</span>
-                    </div>
+                        <span>{{ errors.name }}</span> -->
+                    <!--  :value="inputFieldReset" -->
                 </div>
-                <div class="col-md-6 col-sm-12">
-                    <div class="styled-input">
-                        <input type="text" name="from_name"  v-model="email" />
+                <!-- </div> -->
+                <!-- <div class="col-md-6 col-sm-12"> -->
+                <div class="styled-input">
+                    <v-text-field v-model="email" name="from_name" :error-messages="errors.email" label="email"></v-text-field>
+                    <!-- <input type="text" name="from_name" v-model="email" />
                         <label class="label-email">Email</label>
-                        <span>{{ errors.email }}</span>
-                    </div>
+                        <span>{{ errors.email }}</span> -->
                 </div>
-                <div class="col-md-6 col-sm-12">
-                    <div class="styled-input">
-                        <input type="text" class="input-subject" name="message"
-                            v-model="subject" />
+                <!-- </div> -->
+                <!-- <div class="col-md-6 col-sm-12"> -->
+                <div class="styled-input">
+                    <v-text-field v-model="subject" name="message" class="input-subject" :error-messages="errors.subject"
+                        label="subject"></v-text-field>
+                    <!-- <input type="text" class="input-subject" name="message" v-model="subject" />
                         <label class="lable-subject">Subject</label>
-                        <span>{{ errors.subject }}</span>
-                    </div>
+                        <span>{{ errors.subject }}</span> -->
                 </div>
-                <div class="col-xs-12">
-                    <div class="styled-input wide">
-                        <textarea name="message" type="text" v-model="message"></textarea>
+                <!-- </div> -->
+                <!-- <div class="col-xs-12"> -->
+                <div class="styled-input wide">
+                    <v-textarea clearable name="message" label="message" v-model="message"
+                        :error-messages="errors.message"></v-textarea>
+                    <!-- <textarea name="message" type="text" v-model="message"></textarea>
                         <label class="label-message">Message</label>
-                        <span>{{ errors.message }}</span>
-                    </div>
+                        <span>{{ errors.message }}</span> -->
                 </div>
-                <div class="col-xs-12">
-                    <!-- <div class="btn-lrg submit-btn">Send Message</div> -->
-                    <input class="btn-lrg submit-btn" type="submit" name="Send" />
-                </div>
+                <!-- </div> -->
+                <!-- <div class="col-xs-12"> -->
+                <!-- <div class="btn-lrg submit-btn">Send Message</div> -->
+                <!-- <input class="btn-lrg submit-btn" type="submit" name="Send" /> -->
+                <v-btn color="orange" variant="outlined" width="150" type="submit" name="Send">
+                    Button
+                </v-btn>
+                <!-- </div> -->
             </form>
         </div>
     </div>
@@ -55,6 +65,7 @@ import { toFormValidator } from '@vee-validate/zod';
 import * as zod from 'zod';
 
 
+
 const validationSchema = toFormValidator(
     zod.object({
         name: zod.string().nonempty('This is required').min(8, { message: 'Too short' }),
@@ -64,8 +75,8 @@ const validationSchema = toFormValidator(
     })
 );
 
-const { handleSubmit, errors } = useForm({
-  validationSchema,
+const { handleSubmit, errors,handleReset } = useForm({
+    validationSchema,
 });
 const { value: name } = useField('name');
 const { value: email } = useField('email');
@@ -79,24 +90,23 @@ console.log(theme.value);
 const form = ref(null);
 const inputFieldReset = ref(null);
 
-const sendMail = handleSubmit(values=>{
+const sendMail = handleSubmit(values => {
     emailjs.sendForm('service_g9i2dpl', 'template_6w0672m', form.value, '3z66-fmfviL9jQHXe')
         .then(() => {
-            // alert('Message sent!')
             Swal.fire({
                 icon: 'success',
                 title: 'Submitted successfully',
                 text: 'Thank you for your comments',
             })
-            // inputFieldReset.value = " ";
+            handleReset()
         }, (error) => {
             Swal.fire({
                 icon: 'error',
                 title: 'An error occurred',
                 text: 'Sorry, try again in a few minutes',
             })
-        }); 
-}) 
+        });
+})
 
 
 
@@ -123,6 +133,10 @@ const sendMail = handleSubmit(values=>{
 </script>
 
 <style scoped>
+.v-btn {
+    float: right;
+}
+
 @media screen and (max-width: 767px) {
     .input-container {
         width: 70% !important;
@@ -143,7 +157,7 @@ const sendMail = handleSubmit(values=>{
     .input-subject {
         margin-left: 0 !important;
     }
-
+    
 }
 
 .container {
@@ -155,18 +169,36 @@ const sendMail = handleSubmit(values=>{
         width: 100%;
     }
 
+    .input-container {
+        display: grid;
+        align-items: center;
+        justify-content: center;
+    }
+
     .styled-input {
-        max-width: 100% !important;
+        width: 22rem !important;
     }
 
     h1 {
-        font-size: 40px !important;
+        font-size: 30px !important;
     }
 }
 
 @media screen and (min-width: 768px) {
     .lable-subject {
         padding-left: 5rem !important;
+    }
+    .styled-input {
+    margin-left: 32px !important;
+}
+}
+
+@media screen and (max-width: 400px) {
+
+    .styled-input {
+        width: 18rem !important;
+        margin-left: 0 !important;
+        padding-left: 0 !important;
     }
 }
 
@@ -182,9 +214,9 @@ span {
     color: #000
 } */
 
-.input-subject {
+/* .input-subject {
     margin-left: 64px;
-}
+} */
 
 h1 {
     font-family: "Poppins", sans-serif, "arial";
@@ -245,8 +277,8 @@ textarea:valid~label {
 }
 
 .styled-input.wide {
-    width: 650px;
-    max-width: 100%;
+    width: 620px;
+    /* max-width: 100%; */
 }
 
 input,
@@ -283,7 +315,7 @@ textarea {
 .input-container {
     width: 650px;
     max-width: 100%;
-    margin: 20px auto 25px auto;
+    /* margin: 20px auto 25px auto; */
 }
 
 .submit-btn {

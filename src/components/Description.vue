@@ -78,8 +78,9 @@ const AddToCart=(productId)=>{
     justify-content: center;
     align-items: center;
  }
- img{
+ .pic{
     width: 100%;
+    height: auto;
     padding: 10px 15px 0 14px;
  }
  .v-card-actions{

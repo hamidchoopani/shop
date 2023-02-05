@@ -13,38 +13,28 @@
 
 
       <v-spacer></v-spacer>
-      <!-- <router-link class="contactme" v-bind:class="{ 'text-white': clicked, 'text-black': !clicked }"
-        :to="{ name: 'ContactMe' }"> -->
-      <v-btn :to="{ name: 'ContactMe' }">contact me</v-btn>
-      <!-- </router-link> -->
       
-      <!-- <router-link :to="{ name: 'Cart' }" v-bind:class="{ 'text-white': clicked, 'text-black': !clicked }"> -->
+      <v-btn :to="{ name: 'ContactMe' }">contact me</v-btn>
+     
+
       <v-btn :to="{ name: 'Cart' }" class="cart" stacked @click="dialog = true">
         <v-badge class="text-none" :content="countProductIconHeader" color="info">
           <v-icon>mdi-cart-outline</v-icon>
           <v-tooltip activator="parent" location="bottom">cart</v-tooltip>
         </v-badge>
       </v-btn>
-      <!-- </router-link> -->
+     
 
       <v-btn :prepend-icon="theme === 'light' ? 'mdi-weather-sunny' : 'mdi-weather-night'" @click="onClick">
         <v-tooltip activator="parent" location="bottom">change theme</v-tooltip>
       </v-btn>
 
-      <!-- <router-link :to="{ name: 'AccountUser' }"> -->
       <v-btn icon class="account">
         <v-icon>mdi-account</v-icon>
         <v-tooltip activator="parent" location="bottom">Register</v-tooltip>
       </v-btn>
-      <!-- </router-link> -->
     </v-app-bar>
 
-    <!-- <v-dialog v-model="dialog">
-      <v-btn class="closeDialog" variant="text" @click="dialog = false">
-        <v-icon size="50">mdi-window-close</v-icon>
-      </v-btn>
-      <cart />
-    </v-dialog> -->
     <v-navigation-drawer v-model="drawer" temporary>
       <div class="inmenu">
         <v-btn variant="text" class="accountInmenu" icon
@@ -66,12 +56,7 @@
         </v-btn>
       </div>
     </v-navigation-drawer>
-    <!-- <div class="filterCategory mt-40">
-        <v-btn v-for="c in getAllCategory" :key="c" class="ma-6 text-orange-lighten-2">
-          <span @click="filterCategory(c)">{{ c }}</span>
-        </v-btn>
-      </div> -->
-   
+
     <v-main>
       <v-container>
         <v-row>
@@ -80,35 +65,15 @@
       </v-container>
     </v-main>
 
-    <v-footer>
-      <v-row justify="center" no-gutters>
-        <v-btn variant="text" class="mx-2 text-orange-lighten-2" rounded="xl" v-for="c in getAllCategory">
-          <v-list-item-title @click="filterCategory(c)">{{ c }}</v-list-item-title>
-        </v-btn>
-        <v-col class="text-center mt-8" cols="12">
-          <v-btn class="mx-4" variant="text" @click="toTwitter"><v-icon>mdi-twitter</v-icon>
-            <v-tooltip activator="parent" location="top">twitter</v-tooltip>
-          </v-btn>
-          <v-btn class="mx-4" variant="text"><img width="15" src="@/assets/stackoverflow.png"
-              @click="tostackoverflow" />
-            <v-tooltip activator="parent" location="top">stackoverflow</v-tooltip>
-          </v-btn>
-          <router-link :to="{ name: 'ContactMe' }">
-            <v-btn class="mx-4" variant="text"><img width="15" src="@/assets/gmail.png" />
-              <v-tooltip activator="parent" location="top">email</v-tooltip>
-            </v-btn>
-          </router-link>
-        </v-col>
-        <v-col class="text-center mt-4" cols="12 text-orange-lighten-2">
-          {{ new Date().getFullYear() }}
-        </v-col>
-      </v-row>
-    </v-footer>
+
+    <Footer />
+
+
   </v-app>
 </template>
 
 <script setup>
-import Product from '@/components/Product.vue'
+import Footer from '@/components/Footer.vue'
 import { computed, ref } from 'vue'
 import { storeToRefs } from 'pinia';
 import { useProductStore } from '@/store/Product'
@@ -140,12 +105,7 @@ function filterCategory(data) {
   productStore.filterProductWithCategory(data)
 }
 
-const tostackoverflow = () => {
-  window.open('https://stackoverflow.com/users/12456014/hamid-choopani')
-}
-const toTwitter = () => {
-  window.open('https://twitter.com/hamidchoopani77')
-}
+
 </script>
 
 <style scoped>
@@ -169,7 +129,8 @@ const toTwitter = () => {
     display: none;
   }
 }
-.v-main{
+
+.v-main {
   padding-top: 0;
 }
 
@@ -200,21 +161,6 @@ const toTwitter = () => {
   align-items: end;
 }
 
-.mdi-twitter {
-  color: #00acee
-}
-
-.mdi-linkedin {
-  color: #0A66C2
-}
-
-.v-toolbar-title {
-  margin-left: 10px;
-}
-
-.mdi-telegram {
-  color: #2AABEE
-}
 
 a {
   text-decoration: none;
