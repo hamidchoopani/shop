@@ -16,9 +16,6 @@
 
       <v-btn :to="{ name: 'ContactMe' }">contact me</v-btn>
 
-      <v-select clearable label="Select" :items="['California', 'Colorado', 'Florida', 'Georgia', 'Texas', 'Wyoming']"
-        variant="solo"></v-select>
-
       <v-btn :to="{ name: 'Cart' }" class="cart" stacked @click="dialog = true">
         <v-badge class="text-none" :content="countProductIconHeader" color="info">
           <v-icon>mdi-cart-outline</v-icon>
