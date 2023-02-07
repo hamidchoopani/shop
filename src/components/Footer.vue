@@ -4,10 +4,13 @@
         <div class="footer-left">
             <h3>Shop<span class="text-orange">logo</span></h3>
             <p class="mt-5">quick access</p>
-            <p class="footer-links">
-                <a :to="{ name: 'Product' }" class="link-1">Home</a>
-                <a href="#">About</a>
-                <a href="#">Contact Me</a>
+            <p class="quickAccess mt-3">
+                <!-- <a class="link-1"><span :to="{ name: 'Product' }">Home</span></a> -->
+                <v-btn variant="plain" class="text-orange" :to="{ name: 'Product' }">Home</v-btn>
+                <v-btn variant="plain" class="text-orange" :to="{ name: 'AboutUs' }">About</v-btn>
+                <v-btn variant="plain" class="text-orange" :to="{ name: 'ContactMe' }">Contact Me</v-btn>
+                <!-- <a href="#">About</a> -->
+                <!-- <a href="#">Contact Me</a> -->
             </p>
         </div>
 
@@ -29,11 +32,11 @@
             </div>
             <div class="footer-icons">
                 <v-btn variant="text" @click="toTwitter" icon>
-                    <img width="15" src="@/assets/icon/Twitter-logo.svg"/>
+                    <img width="15" src="@/assets/icon/Twitter-logo.svg" />
                     <v-tooltip activator="parent" location="top">twitter</v-tooltip>
                 </v-btn>
                 <v-btn variant="text" @click="tolinkedin" icon>
-                    <img width="15" src="@/assets/icon/linkedin-svgrepo-com.svg" @click="tostackoverflow" />
+                    <img width="15" src="@/assets/icon/linkedin-svgrepo-com.svg" />
                     <v-tooltip activator="parent" location="top">linkedin</v-tooltip>
                 </v-btn>
                 <v-btn variant="text" icon><img width="15" src="@/assets/stackoverflow.png" @click="tostackoverflow" />
@@ -48,44 +51,43 @@
         </div>
 
         <div class="footer-right">
-
             <p class="footer-company-about">
                 <span>Technology used on the site</span>
                 <v-btn icon variant="text">
-                    <img width="30" src="@/assets/icon/vue-js.svg" @click="toVuejs" />
+                    <img width="30" src="@/assets/icon/vue-js.svg" />
                     <v-tooltip activator="parent" location="top">vue js</v-tooltip>
                 </v-btn>
                 <v-btn icon variant="text">
-                    <img width="30" src="@/assets/icon/vuetify.svg" @click="toVuetify" />
+                    <img width="30" src="@/assets/icon/vuetify.svg" />
                     <v-tooltip activator="parent" location="top">vuetify</v-tooltip>
                 </v-btn>
                 <v-btn icon variant="text">
-                    <img width="35" src="@/assets/icon/vee-validate.png" @click="toveeValidate" />
-                    <v-tooltip activator="parent" location="top">email</v-tooltip>
+                    <img width="35" src="@/assets/icon/vee-validate.png" />
+                    <v-tooltip activator="parent" location="top">vee-validate</v-tooltip>
                 </v-btn>
                 <v-btn icon variant="text">
-                    <img width="25" src="@/assets/icon/pinia.svg" @click="toPinia" />
+                    <img width="25" src="@/assets/icon/pinia.svg" />
                     <v-tooltip activator="parent" location="top">pinia</v-tooltip>
                 </v-btn>
                 <v-btn variant="text">
-                    <img width="110" src="@/assets/icon/axios.svg" @click="toAxios" />
+                    <img width="110" src="@/assets/icon/axios.svg" />
                     <v-tooltip activator="parent" location="top">axios</v-tooltip>
                 </v-btn>
                 <v-btn icon variant="text">
-                    <img width="30" src="@/assets/icon/fakestoreapi.png" @click="toFakestore" />
+                    <img width="30" src="@/assets/icon/fakestoreapi.png" />
                     <v-tooltip activator="parent" location="top">fakestoreapi</v-tooltip>
                 </v-btn>
                 <v-btn variant="text">
-                    <img width="110" src="@/assets/icon/vuesweetalert.png" @click="toSweetalert" />
+                    <img width="110" src="@/assets/icon/vuesweetalert.png" />
                     <v-tooltip activator="parent" location="top">sweetalert</v-tooltip>
                 </v-btn>
                 <v-btn icon variant="text">
-                    <img width="25" src="@/assets/icon/emailjs.png" @click="toEmailjs" />
+                    <img width="25" src="@/assets/icon/emailjs.png" />
                     <v-tooltip activator="parent" location="top">emailjs</v-tooltip>
                 </v-btn>
             </p>
 
-           
+
         </div>
     </footer>
 
@@ -130,10 +132,16 @@ const tolinkedin = () => {
 
 
 <style scoped>
-@import url(https://fonts.googleapis.com/css?family=Open+Sans:400,500,300,700);
-
+@font-face {
+    font-family: custome;
+    src: url('@/assets/font/samim.ttf');
+}
 * {
-    font-family: Open Sans;
+    font-family: custome;
+}
+
+.quickAccess a {
+    padding: 0;
 }
 
 .mdi-twitter {

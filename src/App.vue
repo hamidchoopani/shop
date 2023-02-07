@@ -6,7 +6,7 @@
       <v-app-bar-nav-icon class="hamburgermenu" @click="drawer = !drawer"></v-app-bar-nav-icon>
       <!-- <router-link :to="{ name: 'Product' }"> -->
       <v-toolbar-title>
-        <v-btn variant="plain" class="text-orange" :to="{ name: 'Product' }">Shop</v-btn>
+        <v-btn variant="plain" class="text-orange logo" :to="{ name: 'Product' }">Shop</v-btn>
       </v-toolbar-title>
       <!-- </router-link> -->
 
@@ -108,6 +108,22 @@ function filterCategory(data) {
 </script>
 
 <style scoped>
+
+@font-face {
+    font-family: custome;
+    src: url('@/assets/font/samim.ttf');
+}
+@font-face {
+    font-family: Raisahi;
+    src: url('@/assets/font/BLKCHCRY.TTF');
+}
+* {
+    font-family: custome;
+}
+.logo{
+  font-family: Raisahi; 
+  font-size: 25px; 
+}
 .mdi-instagram {
   color: #d62976;
 }

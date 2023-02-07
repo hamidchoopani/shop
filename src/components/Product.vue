@@ -75,6 +75,13 @@ productStore.getProduct(value)
 </script>
 
 <style scoped>
+@font-face {
+    font-family: custome;
+    src: url('@/assets/font/samim.ttf');
+}
+* {
+    font-family: custome;
+}
 a {
     text-decoration: none;
 }

@@ -64,6 +64,13 @@ const AddToCart=(productId)=>{
 </script>
 
 <style scoped>
+@font-face {
+    font-family: custome;
+    src: url('@/assets/font/samim.ttf');
+}
+* {
+    font-family: custome;
+}
 .v-card {
     width: 100%;
     display: flex;

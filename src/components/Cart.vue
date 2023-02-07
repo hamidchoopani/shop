@@ -61,6 +61,16 @@ ProductData.getProductInCart()
 </script>
 
 <style scoped>
+@font-face {
+    font-family: custome;
+    src: url('@/assets/font/samim.ttf');
+}
+* {
+    font-family: custome;
+}
+.v-card-text{
+  margin-top: 60px !important;
+}
 .v-btn {
   margin-left: 10px;
   padding: 10px;

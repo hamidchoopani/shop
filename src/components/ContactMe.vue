@@ -1,5 +1,4 @@
 <template>
-
     <div class="container">
         <div class="row">
             <h1>contact me</h1>
@@ -48,7 +47,7 @@
                 <!-- <input class="btn-lrg submit-btn" type="submit" name="Send" /> -->
                 <v-btn color="orange" variant="outlined" width="150" type="submit" name="Send">
                     Button
-                </v-btn>
+                </v-btn>    
                 <!-- </div> -->
             </form>
         </div>
@@ -133,6 +132,13 @@ const sendMail = handleSubmit(values => {
 </script>
 
 <style scoped>
+@font-face {
+    font-family: custome;
+    src: url('@/assets/font/samim.ttf');
+}
+* {
+    font-family: custome;
+}
 .v-btn {
     float: right;
 }
@@ -219,7 +225,6 @@ span {
 } */
 
 h1 {
-    font-family: "Poppins", sans-serif, "arial";
     font-weight: 600;
     font-size: 72px;
     /* color: white; */
@@ -227,7 +232,6 @@ h1 {
 }
 
 h4 {
-    font-family: "Roboto", sans-serif, "arial";
     font-weight: 400;
     font-size: 20px;
     /* color: #9b9b9b; */
