@@ -1,4 +1,7 @@
 <template>
+  <div class="splash" v-if="splash" :class="{ 'diplay-none': !splash }">
+    <h1 class="fade-in">welcome to website</h1>
+  </div>
   <v-app :theme="theme">
     <v-app-bar>
 
@@ -73,7 +76,7 @@
 
 <script setup>
 import Footer from '@/components/Footer.vue'
-import { computed, ref } from 'vue'
+import { computed, ref, onMounted } from 'vue'
 import { storeToRefs } from 'pinia';
 import { useProductStore } from '@/store/Product'
 import cart from '@/components/Cart.vue'
@@ -82,7 +85,16 @@ const dialog = ref(true)
 const drawer = ref(null)
 const productStore = useProductStore()
 const open = ref(['Users'])
-const { AllProduct, getAllCategory, countProductIconHeader, getProductInCart } = storeToRefs(productStore)
+const { AllProduct, getAllCategory, countProductIconHeader, getProductInCart, splash } = storeToRefs(productStore)
+
+// splash screen
+onMounted(() => {
+  splashScreen()
+})
+function splashScreen() {
+  productStore.splashTime()
+}
+
 // dark mode
 const theme = ref('light')
 theme.value = localStorage.getItem('theme');
@@ -108,22 +120,66 @@ function filterCategory(data) {
 </script>
 
 <style scoped>
+/* splash screen */
+.splash {
+  position: fixed;
+  top: 0;
+  left: 0;
+  width: 100%;
+  height: 100vh;
+  background: #121212ed;
+  z-index: 1200;
+  color: #ff98009c;
+  text-align: center;
+  line-height: 100vh;
+}
+
+.splash.diplay-none {
+  position: fixed;
+  top: 0;
+  opacity: 0;
+  left: 0;
+  width: 100%;
+  height: 100vh;
+  background: #000;
+  z-index: -10;
+  color: white;
+  text-align: center;
+  line-height: 50vh;
+  transition: all 1s;
+}
+
+@keyframes fadeIn {
+  to {
+    opacity: 1;
+  }
+}
+
+.fade-in {
+  opacity: 0;
+  animation: fadeIn 1s ease-in forwards;
+}
+
+/* end splash screen */
+@font-face {
+  font-family: custome;
+  src: url('@/assets/font/samim.ttf');
+}
 
 @font-face {
-    font-family: custome;
-    src: url('@/assets/font/samim.ttf');
+  font-family: Raisahi;
+  src: url('@/assets/font/BLKCHCRY.TTF');
 }
-@font-face {
-    font-family: Raisahi;
-    src: url('@/assets/font/BLKCHCRY.TTF');
-}
+
 * {
-    font-family: custome;
+  font-family: custome;
 }
-.logo{
-  font-family: Raisahi; 
-  font-size: 25px; 
+
+.logo {
+  font-family: Raisahi;
+  font-size: 25px;
 }
+
 .mdi-instagram {
   color: #d62976;
 }
@@ -142,6 +198,30 @@ function filterCategory(data) {
   .filterbtn,
   .account {
     display: none;
+  }
+}
+
+@media screen and (max-width:460px) {
+  .logo {
+    font-size: 15px;
+  }
+}
+
+@media screen and (max-width:394px) {
+  .logo {
+    font-size: 15px;
+    padding: 0;
+  }
+
+  .v-toolbar-title {
+    margin-inline-start: 0 !important;
+  }
+}
+
+@media screen and (max-width:394px) {
+  .logo {
+    font-size: 8px;
+    padding: 0;
   }
 }
 

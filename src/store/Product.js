@@ -9,6 +9,7 @@ export const useProductStore = defineStore('productStore', {
         getAllCategory: [],
         loading: true,
         countProductIconHeader: 0,
+        splash: true,
         // productLenght: 1,
         //cart
         getAllProuctCart: '',
@@ -30,7 +31,7 @@ export const useProductStore = defineStore('productStore', {
             axios('https://fakestoreapi.com/products')
                 .then(res => {
                     if (res.status === 200) {
-                        this.AllProduct = res.data.slice((this.page - 1)* this.pageSize , (this.page) * this.pageSize);
+                        this.AllProduct = res.data.slice((this.page - 1) * this.pageSize, (this.page) * this.pageSize);
                         // console.log(res.data);
                         // this.listToShow = this.AllProduct.slice((this.page - 1) , (this.page) * this.pageSize);
                         this.SingleProduct = '';
@@ -68,7 +69,7 @@ export const useProductStore = defineStore('productStore', {
         async filterProductWithCategory(category) {
             if (category == 'allProduct') {
                 this.loading = true
-                this.page=1
+                this.page = 1
                 return this.AllProduct = this.getProduct()
             }
             console.log(category);
@@ -111,5 +112,10 @@ export const useProductStore = defineStore('productStore', {
                     })
                 })
         },
+        splashTime() {
+            setTimeout(() => {
+                this.splash = false
+            }, 3000);
+        }
     }
 })
