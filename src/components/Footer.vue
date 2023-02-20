@@ -5,12 +5,9 @@
             <h3>Shop<span class="text-orange">logo</span></h3>
             <p class="mt-5">quick access</p>
             <p class="quickAccess mt-3">
-                <!-- <a class="link-1"><span :to="{ name: 'Product' }">Home</span></a> -->
                 <v-btn variant="plain" class="text-orange" :to="{ name: 'Product' }">Home</v-btn>
                 <v-btn variant="plain" class="text-orange" :to="{ name: 'AboutUs' }">About</v-btn>
                 <v-btn variant="plain" class="text-orange" :to="{ name: 'ContactMe' }">Contact Me</v-btn>
-                <!-- <a href="#">About</a> -->
-                <!-- <a href="#">Contact Me</a> -->
             </p>
         </div>
 

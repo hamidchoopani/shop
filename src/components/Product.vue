@@ -51,9 +51,6 @@ import { ref } from '@vue/reactivity';
 import { computed } from '@vue/runtime-core';
 import { storeToRefs } from 'pinia';
 
-// const page = ref(1);
-// const pageSize = ref(4);
-
 const productStore = useProductStore()
 
 const { AllProduct, loading, page,pageSize,getAllCategory } = storeToRefs(productStore)
@@ -66,11 +63,6 @@ function filterCategory(data) {
 const pageination=(value)=>{
 productStore.getProduct(value)
 }
-
-// const pagesCount = computed(() => Math.ceil(AllProduct.value.length / pageSize.value))
-
-// const listToShow = computed(() => AllProduct.value.slice((page.value - 1) * pageSize.value , (page.value) * pageSize.value))
-
 
 </script>
 

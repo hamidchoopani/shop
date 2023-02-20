@@ -2,11 +2,9 @@
   <v-card>
     <v-card-text>
       <div class="shopping-cart">
-        <!-- Title -->
         <div class="title">
           Shopping cart
         </div>
-        <!-- Product #1 -->
         <div class="titleCart">
           <span>product name</span>
           <span>count</span>
@@ -14,8 +12,6 @@
         </div>
         <v-divider></v-divider>
         <div class="item" v-for="p in getAllProuctCart" :key="p">
-
-
           <div class="description">
             <span>product name</span>
           </div>
@@ -79,8 +75,6 @@ ProductData.getProductInCart()
 .shopping-cart {
   width: 750px;
   height: auto;
-  /* background: #fff; */
-  /* box-shadow: 1px 2px 3px 0px rgba(0, 0, 0, 0.1); */
   border-radius: 0.5em;
 
   display: flex;

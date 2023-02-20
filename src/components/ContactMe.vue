@@ -5,50 +5,24 @@
         </div>
         <div class="row input-container">
             <form class="form" ref="form" @submit.prevent="sendMail">
-                <!-- <div class="col-xs-6"> -->
                 <div class="styled-input wide">
-
                     <v-text-field v-model="name" name="to_name" :error-messages="errors.name" label="Name"></v-text-field>
-
-                    <!-- <input type="text" name="to_name" v-model="name" />
-                        <label class="label-name">Name</label>
-                        <span>{{ errors.name }}</span> -->
-                    <!--  :value="inputFieldReset" -->
                 </div>
-                <!-- </div> -->
-                <!-- <div class="col-md-6 col-sm-12"> -->
                 <div class="styled-input">
                     <v-text-field v-model="email" name="from_name" :error-messages="errors.email" label="email"></v-text-field>
-                    <!-- <input type="text" name="from_name" v-model="email" />
-                        <label class="label-email">Email</label>
-                        <span>{{ errors.email }}</span> -->
                 </div>
-                <!-- </div> -->
-                <!-- <div class="col-md-6 col-sm-12"> -->
                 <div class="styled-input">
                     <v-text-field v-model="subject" name="message" class="input-subject" :error-messages="errors.subject"
                         label="subject"></v-text-field>
-                    <!-- <input type="text" class="input-subject" name="message" v-model="subject" />
-                        <label class="lable-subject">Subject</label>
-                        <span>{{ errors.subject }}</span> -->
                 </div>
-                <!-- </div> -->
-                <!-- <div class="col-xs-12"> -->
                 <div class="styled-input wide">
                     <v-textarea clearable name="message" label="message" v-model="message"
                         :error-messages="errors.message"></v-textarea>
-                    <!-- <textarea name="message" type="text" v-model="message"></textarea>
-                        <label class="label-message">Message</label>
-                        <span>{{ errors.message }}</span> -->
                 </div>
-                <!-- </div> -->
-                <!-- <div class="col-xs-12"> -->
-                <!-- <div class="btn-lrg submit-btn">Send Message</div> -->
-                <!-- <input class="btn-lrg submit-btn" type="submit" name="Send" /> -->
+                
                 <v-btn color="orange" variant="outlined" width="150" type="submit" name="Send">
                     Button
                 </v-btn>    
-                <!-- </div> -->
             </form>
         </div>
     </div>
@@ -90,7 +64,7 @@ const form = ref(null);
 const inputFieldReset = ref(null);
 
 const sendMail = handleSubmit(values => {
-    emailjs.sendForm('service_g9i2dpl', 'template_6w0672m', form.value, '3z66-fmfviL9jQHXe')
+    emailjs.sendForm('', '', form.value, '')
         .then(() => {
             Swal.fire({
                 icon: 'success',
@@ -106,28 +80,6 @@ const sendMail = handleSubmit(values => {
             })
         });
 })
-
-
-
-// const sendMail = () => {
-//     emailjs.sendForm('service_g9i2dpl', 'template_6w0672m', form.value, '3z66-fmfviL9jQHXe')
-//         .then(() => {
-//             // alert('Message sent!')
-//             Swal.fire({
-//                 icon: 'success',
-//                 title: 'Submitted successfully',
-//                 text: 'Thank you for your comments',
-//             })
-//             inputFieldReset.value = " ";
-//         }, (error) => {
-//             Swal.fire({
-//                 icon: 'error',
-//                 title: 'An error occurred',
-//                 text: 'Sorry, try again in a few minutes',
-//             })
-//         });
-// }
-
 
 </script>
 
@@ -146,8 +98,6 @@ const sendMail = handleSubmit(values => {
 @media screen and (max-width: 767px) {
     .input-container {
         width: 70% !important;
-        /* display: flex; */
-        /* max-width: 100%; */
         margin: auto;
     }
 

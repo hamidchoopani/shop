@@ -16,12 +16,9 @@ export const useProductStore = defineStore('productStore', {
         // totalProductInCart:0
 
         //pagination
-        page: 1, //صفحه ی پیش فرض
-        pageSize: 4, //تعداد محصولات برای نمایش
+        page: 1,
+        pageSize: 4,
         listToShow: '',
-
-        //for color icon
-        // dialog:false
     }),
     getters: {
 
@@ -32,8 +29,6 @@ export const useProductStore = defineStore('productStore', {
                 .then(res => {
                     if (res.status === 200) {
                         this.AllProduct = res.data.slice((this.page - 1) * this.pageSize, (this.page) * this.pageSize);
-                        // console.log(res.data);
-                        // this.listToShow = this.AllProduct.slice((this.page - 1) , (this.page) * this.pageSize);
                         this.SingleProduct = '';
                         this.loading = false;
                     }

@@ -16,7 +16,6 @@
         </v-col>
     </div>
     <v-card class="mx-auto" v-else>
-        <!-- <v-img src="@/assets/logo.png" /> -->
         <img class="pic" :src="SingleProduct.image" alt="ProductImage">
         
         <v-card-text>

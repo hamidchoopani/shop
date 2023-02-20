@@ -5,15 +5,10 @@
   <v-app :theme="theme">
     <v-app-bar>
 
-      <!-- <v-app-bar-nav-icon></v-app-bar-nav-icon> -->
       <v-app-bar-nav-icon class="hamburgermenu" @click="drawer = !drawer"></v-app-bar-nav-icon>
-      <!-- <router-link :to="{ name: 'Product' }"> -->
       <v-toolbar-title>
         <v-btn variant="plain" class="text-orange logo" :to="{ name: 'Product' }">Shop</v-btn>
       </v-toolbar-title>
-      <!-- </router-link> -->
-
-
 
       <v-spacer></v-spacer>
 
