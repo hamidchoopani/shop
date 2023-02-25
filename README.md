@@ -1,5 +1,5 @@
 # default
-
+Project Link => https://gloryandbeauty.netlify.app/
 ## Project setup
 
 ```
